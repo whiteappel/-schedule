@@ -1,4 +1,4 @@
 package com.example.schedule.service;
 
-public class ScheduleSericelmpl {
+public class ScheduleService {
 }
