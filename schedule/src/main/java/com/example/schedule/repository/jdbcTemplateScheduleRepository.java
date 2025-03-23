@@ -54,6 +54,11 @@ public class jdbcTemplateScheduleRepository implements ScheduleRepository {
     }
 
     @Override
+    public int updateSchedule(long id, String title, String todo){
+        return jdbcTemplate.update("update schedule " + "set title = ?, todo = ?  " + "where id = ?",title,todo,id);
+    }
+
+    @Override
     public void deleteSchedule(Long id) {
     }
 
