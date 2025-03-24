@@ -21,22 +21,27 @@ public class ScheduleController {
     }
     //모든 목록조회
     @GetMapping
-    public List<ScheduleResponseDto> getAllSchdeules(){
+    public List<ScheduleResponseDto> getAllSchedules(){
         return scheduleService.findAllSchedules();
     }
     //단일 목록 조회
     @GetMapping("/{id}")
-    public ScheduleResponseDto findScheduleById(Long id){
+    public ScheduleResponseDto findScheduleById(@PathVariable("id") Long id){
         return scheduleService.findScheduleById(id);
     }
     //업데이트
     @PatchMapping("/{id}")
-    public ScheduleResponseDto updateSchedule(Long id, String name, String todo){
+    public ScheduleResponseDto updateSchedule(
+            @PathVariable("id") Long id,
+            @RequestParam("name") String name,
+            @RequestParam("todo") String todo){
         return scheduleService.updateSchedule(id,name,todo);
     }
     //삭제
     @DeleteMapping("/{id}")
-    public int deleteSchedule(Long id, String password){
+    public int deleteSchedule(
+            @PathVariable("id") Long id,
+            @RequestParam("password") String password){
         return scheduleService.deleteSchedule(id,password);
     }
 

@@ -18,8 +18,6 @@ public interface ScheduleRepository {
     List<ScheduleResponseDto> findAllSchedules();
     //일부목록
     Optional<Schedule> findScheduleById(long id);
-    //오류잡는거
-    Schedule findScheduleByIdOrElseThrow(Long id);
     //수정
     int updateSchedule(Long id, String title, String todo);
     //삭제

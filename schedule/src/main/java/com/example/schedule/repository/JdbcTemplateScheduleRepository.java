@@ -47,7 +47,8 @@ public class JdbcTemplateScheduleRepository implements ScheduleRepository {
         //저장후 생성된 key값 number 타입으로 반환
         Number key = jdbcInsert.executeAndReturnKey(new MapSqlParameterSource(parameters));
 
-        return new ScheduleResponseDto(key.longValue(), schedule.getName(),schedule.getTodo(), schedule.getPassword(), now, now);
+        Schedule savedSchedule = new Schedule(key.longValue(), schedule.getName(),schedule.getTodo(), schedule.getPassword(), now, now);
+        return new ScheduleResponseDto(savedSchedule);
     }
     //전체 조회
     @Override
@@ -60,12 +61,6 @@ public class JdbcTemplateScheduleRepository implements ScheduleRepository {
         List<Schedule> result = jdbcTemplate.query("select * from schedule where id = ?", scheduleRowMapperV2(), id);
 
         return result.stream().findAny();
-    }
-    //오류제어
-    @Override
-    public Schedule findScheduleByIdOrElseThrow(Long id){
-        List<Schedule> result = jdbcTemplate.query("select * from schedule where id = ?", scheduleRowMapperV2(), id);
-        return result.stream().findAny().orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND,"Does not exists id=?"+id));
     }
     //수정
     @Override

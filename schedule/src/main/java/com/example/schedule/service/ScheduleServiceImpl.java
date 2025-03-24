@@ -26,10 +26,9 @@ public class ScheduleServiceImpl implements ScheduleService{
     @Override
     public ScheduleResponseDto saveSchedule(ScheduleRequestDto dto) {
         //요청받은 데이터를 스케쥴 객체 생성 id없이
-        Schedule schedule = new Schedule(dto.getName(), dto.getTodo(),dto.getPassword(), LocalDateTime.now());
+        Schedule schedule = new Schedule(dto.getName(), dto.getPassword(), dto.getTodo(), LocalDateTime.now());
 
-        //저장
-        return  new ScheduleResponseDto(schedule);
+        return  scheduleRepository.saveSchedule(schedule);
     }
 
     //다찾는거
@@ -52,6 +51,7 @@ public class ScheduleServiceImpl implements ScheduleService{
 
         return  new ScheduleResponseDto(optionalSchedule.get());
     }
+
     //수정
     @Transactional
     @Override
