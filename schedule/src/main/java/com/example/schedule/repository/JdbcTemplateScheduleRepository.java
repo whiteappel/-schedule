@@ -47,7 +47,7 @@ public class JdbcTemplateScheduleRepository implements ScheduleRepository {
         //저장후 생성된 key값 number 타입으로 반환
         Number key = jdbcInsert.executeAndReturnKey(new MapSqlParameterSource(parameters));
 
-        return new ScheduleResponseDto(key.longValue(), schedule.getName(), schedule.getPassword(), schedule.getTodo(), now, now);
+        return new ScheduleResponseDto(key.longValue(), schedule.getName(),schedule.getTodo(), schedule.getPassword(), now, now);
     }
     //전체 조회
     @Override
@@ -74,8 +74,8 @@ public class JdbcTemplateScheduleRepository implements ScheduleRepository {
     }
     //삭제
     @Override
-    public int deleteSchedule(Long id) {
-        return jdbcTemplate.update("delete from schedule where id = ?", id);
+    public int deleteSchedule(Long id,String password) {
+        return jdbcTemplate.update("delete from schedule where id = ? and password = ?", id, password);
     }
 
     private RowMapper<ScheduleResponseDto> scheduleRowMapper(){
@@ -86,7 +86,7 @@ public class JdbcTemplateScheduleRepository implements ScheduleRepository {
                 return new ScheduleResponseDto(
                         rs.getLong("id"),
                         rs.getString("name"),
-                        rs.getNString("password"),
+                        rs.getString("password"),
                         rs.getString("todo"),
                         rs.getTimestamp("createday").toLocalDateTime(),
                         rs.getTimestamp("reportingday").toLocalDateTime()

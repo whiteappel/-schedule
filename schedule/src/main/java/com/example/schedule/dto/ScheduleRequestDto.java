@@ -13,6 +13,9 @@ public class ScheduleRequestDto {
 //주의: `작성/수정일`은 날짜와 시간을 모두 포함한 형태 최초 입력 시, 수정일은 작성일과 동일
     private long id; //만들때 따로 지정안하도록 주의해야함
     private String name;//이름
-    private String password;
+    private String password;//비번
     private String todo;//할일
+    private LocalDateTime createday;
+    private LocalDateTime reportingday;
+
 }
