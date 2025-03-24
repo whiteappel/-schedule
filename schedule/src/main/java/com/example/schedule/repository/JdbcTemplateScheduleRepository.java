@@ -13,6 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,25 +24,30 @@ public class JdbcTemplateScheduleRepository implements ScheduleRepository {
 
     private final JdbcTemplate jdbcTemplate;
 
-
     public JdbcTemplateScheduleRepository(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
     @Override
     public ScheduleResponseDto saveSchedule(Schedule schedule){
-        //insert 퀴리 문자열 직접 작성안해도되게해줌
+        //insert 퀴리 문자열 직접 작성안해도되게해줌 그리고 자동증가 ID
         SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
         jdbcInsert.withTableName("schedule").usingGeneratedKeyColumns("id");
 
+        //현재시간
+        LocalDateTime now = LocalDateTime.now();
+
         Map<String, Object> parameters = new HashMap<>();
-        parameters.put("title", schedule.getTitle());
+        parameters.put("name", schedule.getName());
+        parameters.put("password", schedule.getPassword());
         parameters.put("todo", schedule.getTodo());
+        parameters.put("createday", now);
+        parameters.put("repotingday", now);//최초값은 수정일과 작성일 같으므로 이렇게 작성
 
         //저장후 생성된 key값 number 타입으로 반환
         Number key = jdbcInsert.executeAndReturnKey(new MapSqlParameterSource(parameters));
 
-        return new ScheduleResponseDto(key.longValue(), schedule.getTitle(), schedule.getTodo());
+        return new ScheduleResponseDto(key.longValue(), schedule.getName(), schedule.getPassword(), schedule.getTodo(), schedule.getCreateday(), schedule.getReportingday());
     }
 
     @Override
