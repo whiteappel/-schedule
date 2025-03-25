@@ -11,7 +11,6 @@ import java.util.List;
 public interface ScheduleService {
     //일단 저장
     ScheduleResponseDto saveSchedule(ScheduleRequestDto dto);
-
     //모든 목록조회
     List<ScheduleResponseDto> findAllSchedules();
     //단일 목록 조회

@@ -47,7 +47,8 @@ public class JdbcTemplateScheduleRepository implements ScheduleRepository {
         //저장후 생성된 key값 number 타입으로 반환
         Number key = jdbcInsert.executeAndReturnKey(new MapSqlParameterSource(parameters));
 
-        Schedule savedSchedule = new Schedule(key.longValue(), schedule.getName(),schedule.getTodo(), schedule.getPassword(), now, now);
+        Schedule savedSchedule = new Schedule(key.longValue(), schedule.getName(),schedule.getPassword(), schedule.getTodo(), now, now);
+
         return new ScheduleResponseDto(savedSchedule);
     }
     //전체 조회
