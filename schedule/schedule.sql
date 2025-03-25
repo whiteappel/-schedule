@@ -3,6 +3,6 @@ CREATE TABLE schedule (
     name VARCHAR(255) NOT NULL,            -- 작성자명
     todo VARCHAR(255) NOT NULL,            -- 할 일
     password VARCHAR(255) NOT NULL,        -- 비밀번호
-    written DATETIME DEFAULT CURRENT_TIMESTAMP,  -- 작성일
-    reporting DATETIME DEFAULT CURRENT_TIMESTAMP  -- 수정일 (수정 시 자동 갱신)
+    createday DATETIME DEFAULT CURRENT_TIMESTAMP,  -- 작성일
+    reportingday DATETIME DEFAULT CURRENT_TIMESTAMP  -- 수정일 (수정 시 자동 갱신)
 );

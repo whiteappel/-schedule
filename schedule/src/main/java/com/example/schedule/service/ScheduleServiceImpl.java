@@ -66,8 +66,11 @@ public class ScheduleServiceImpl implements ScheduleService{
         if(updatedRow == 0){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "변경 사항 없음");
         }
-
         Optional<Schedule> optionSchedule = scheduleRepository.findScheduleById(id);
+
+        if (optionSchedule.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "스케줄을 찾을 수 없습니다.");
+        }
 
         return new ScheduleResponseDto(optionSchedule.get());
     }
