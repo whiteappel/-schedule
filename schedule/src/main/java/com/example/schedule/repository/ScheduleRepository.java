@@ -19,7 +19,7 @@ public interface ScheduleRepository {
     //일부목록
     Optional<Schedule> findScheduleById(long id);
     //수정
-    int updateSchedule(Long id, String title, String todo);
+    int updateSchedule(Long id, String name, String todo);
     //삭제
     int deleteSchedule(Long id, String password);
 }
