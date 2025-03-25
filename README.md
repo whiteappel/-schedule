@@ -18,9 +18,7 @@
 {
     "name": "Joh",
     "password": "123",
-    "todo": "Complete Spring Boot project",
-    "createday": "2025-03-24T12:00:00",
-    "reportingday": "2025-03-24T12:00:00"
+    "todo": "Complete Spring Boot project"
 }
 ```
 
@@ -68,8 +66,8 @@
     },
     {
         "id": 2,
-        "name": "Johy",
-        "password": "456",
+        "name": "Joh",
+        "password": "123",
         "todo": "Complete Spring Boot tutorial",
         "createday": "2025-03-24T12:00:00",
         "reportingday": "2025-03-24T12:00:00"
@@ -91,8 +89,6 @@
     "name": "Joh",
     "password": "123",
     "todo": "Update",
-    "createday": "2025-03-24T12:00:00",
-    "reportingday": "2025-03-24T12:00:00"
 }
 ```
 
